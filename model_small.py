@@ -24,6 +24,7 @@ class Encoder(torch.nn.Module):
         self.reset_parameters()
 
     def reset_parameters(self):
+        """初始化模型参数"""
         for i in range(self.k):
             self.convs[i].reset_parameters()
 

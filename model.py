@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch_geometric.nn import SAGEConv, GCNConv
 import torch.nn.functional as F
 
-from utils.loss import Loss
+from utils.loss import Loss, ChunkedLoss
 
 
 class Encoder(torch.nn.Module):
@@ -24,6 +24,7 @@ class Encoder(torch.nn.Module):
         self.reset_parameters()
 
     def reset_parameters(self):
+        """初始化模型参数"""
         for i in range(self.k):
             self.convs[i].reset_parameters()
 
@@ -53,6 +54,8 @@ class Model(torch.nn.Module):
         self.project_hidden = project_hidden
         self.activation = activation
         self.Loss = Loss(temperature=self.tau)
+        #self.Loss = ChunkedLoss(temperature=self.tau)
+        
 
         self.project = None
         if self.project_hidden is not None:

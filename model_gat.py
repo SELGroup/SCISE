@@ -17,8 +17,11 @@ class Encoder(torch.nn.Module):
 
         self.convs = nn.ModuleList()
         for i in range(self.k):
+            # 第一层的输入是原始特征维度，后续层输入是上一层 hidden * heads
             in_dim = in_channels if i == 0 else hidden_channels[i-1] * self.heads
             out_dim = hidden_channels[i]
+            
+            # 最后一层通常 concat=False (多头取平均)，其余层 concat=True (多头拼接)
             is_last = (i == self.k - 1)
             self.convs.append(GATConv(in_dim, out_dim, heads=self.heads, 
                                       concat=not is_last, dropout=dropout))
@@ -26,6 +29,7 @@ class Encoder(torch.nn.Module):
         self.reset_parameters()
 
     def reset_parameters(self):
+        """初始化模型参数"""
         for i in range(self.k):
             self.convs[i].reset_parameters()
 
