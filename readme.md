@@ -9,9 +9,9 @@ If you use this project, please cite:
     booktitle  ={International Conference on Very Large Data Bases},
     year       ={2026}, 
     publisher  ={VLDB Endowment},
-    volume     ={19},
-	number     ={11},
-	pages 	   ={3497–3510},
+    volume     ={19}, 
+    number     ={11},
+    pages      ={3497–3510}, 
     doi        ={10.14778/3836663.3836704},
     url        ={https://doi.org/10.14778/3836663.3836704}
     } 
